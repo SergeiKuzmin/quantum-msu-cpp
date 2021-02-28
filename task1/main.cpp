@@ -17,10 +17,10 @@ int main()
     push_after(list, node, 45.0);
     push_before(list, node, 11.0);
     print(list);
-    /*pop(list, node);
+    pop(list, node);
     print(list);
     clear(list);
     print(list);
-    delete(list);*/
+    delete(list);
     return 0;
 }

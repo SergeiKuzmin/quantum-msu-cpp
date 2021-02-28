@@ -5,13 +5,24 @@
 int push_before(List *l, Node *node, double value){
     Node *new_node = new Node;
     new_node->value = value;
-    new_node->next = node;
-    if (l->first == node) {
-        new_node->prev = nullptr;
+
+    if ((l->first == nullptr) && (l->last == nullptr)) {
         l->first = new_node;
+        l->last = new_node;
+        new_node->prev = nullptr;
+        new_node->next = nullptr;
     } else {
-        new_node->prev = node->prev;
-        node->prev = new_node;
+        if (l->first == node) {
+            new_node->prev = nullptr;
+            new_node->next = node;
+            l->first = new_node;
+            node->prev = new_node;
+        } else {
+            new_node->prev = node->prev;
+            new_node->next = node;
+            (node->prev)->next = new_node;
+            node->prev = new_node;
+        }
     }
     return 0;
 }
@@ -19,31 +30,54 @@ int push_before(List *l, Node *node, double value){
 int push_after(List *l, Node *node, double value){
     Node *new_node = new Node;
     new_node->value = value;
-    new_node->prev = node;
-    if (l->last == node){
-        new_node->next = nullptr;
+
+    if ((l->first == nullptr) && (l->last == nullptr)) {
+        l->first = new_node;
         l->last = new_node;
+        new_node->prev = nullptr;
+        new_node->next = nullptr;
     } else {
-        new_node->next = node->next;
-        node->next = new_node;
+        if (l->last == node) {
+            new_node->prev = node;
+            new_node->next = nullptr;
+            l->last = new_node;
+            node->next = new_node;
+        } else {
+            new_node->next = node->next;
+            new_node->prev = node;
+            (node->next)->prev = new_node;
+            node->next = new_node;
+        }
     }
     return 0;
 }
 
 int pop(List *l, Node *node){
-    if (l->first == node){
-        l->first = node->next;
-        (node->next)->prev = nullptr;
-    } else {
-        if (l->last == node) {
-            l->last = node->prev;
-            (node->prev)->next = nullptr;
+    if (node != nullptr){
+        if ((l->first == node) && (l->last == node)){
+            l->first = nullptr;
+            l->last = nullptr;
+            delete node;
         } else {
-            (node->prev)->next = node->next;
-            (node->next)->prev = node->prev;
+            if (l->first == node){
+                l->first = node->next;
+                (node->next)->prev = nullptr;
+                delete node;
+            } else {
+                if (l->last == node){
+                    l->last = node->prev;
+                    (node->prev)->next = nullptr;
+                    delete node;
+                } else {
+                    if ((l->first != node) && (l->last != node)){
+                        (node->prev)->next = node->next;
+                        (node->next)->prev = node->prev;
+                        delete node;
+                    }
+                }
+            }
         }
     }
-    delete node;
     return 0;
 }
 
@@ -71,20 +105,26 @@ void print(List *l){
     if (ptr == nullptr){
         std::cout << "Empty list" << std::endl;
     } else {
+        std::cout << ptr->value << " ";
         do{
-            std::cout << ptr->value << std::endl;
             ptr = ptr->next;
+            std::cout << ptr->value << " ";
         }while (ptr != l->last);
     }
+    std::cout << std::endl;
 }
 
 void clear(List *l){
-    Node *ptr = l->first;
-    do{
-        if (ptr != l->last) {
-            Node *cur_ptr = ptr;
+    if ((l->first != nullptr) && (l->last != nullptr)){
+        Node *ptr = l->first;
+        Node *cur_ptr = ptr;
+        delete cur_ptr;
+        do{
             ptr = ptr->next;
+            Node *cur_ptr = ptr;
             delete cur_ptr;
-        }
-    }while (ptr != l->last);
+        }while (ptr != l->last);
+        l->first = nullptr;
+        l->last = nullptr;
+    }
 }
