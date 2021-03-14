@@ -39,8 +39,10 @@ List::List(List &&other){
 	 */
 	this->first = other.first;
 	this->last = other.last;
+	this->cached_size = other.cached_size;
 	other.first = nullptr;
 	other.last = nullptr;
+	other.cached_size = 0;
 }
 
 void List::push_before(Iterator it, double value){
