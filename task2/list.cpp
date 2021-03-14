@@ -26,9 +26,10 @@ List::List(const List &other){
 	 * вместе со всеми узлами. Исходный список при этом остаётся
 	 * неизменным.
 	 */
-	 this->first = other.first;
-	 this->last = other.last;
-	 this->cached_size = other.cached_size;
+	 this->clear();
+	 for(auto val: other){
+	    this->push_back(val);
+	 }
 }
 
 List::List(List &&other){
@@ -36,13 +37,17 @@ List::List(List &&other){
 	 * в любой момент времени существует только одна копия узлов
 	 * списка. После перемещения other должен стать пустым списком.
 	 */
-	// TODO
+	this->first = other.first;
+	this->last = other.last;
+	other.first = nullptr;
+	other.last = nullptr;
 }
 
 void List::push_before(Iterator it, double value){
     Node *node = it.n;
     Node *new_node = new Node;
     new_node->value = value;
+    this->cached_size++;
 
     if ((this->first == nullptr) && (this->last == nullptr)) {
         this->first = new_node;
@@ -68,6 +73,7 @@ void List::push_after(Iterator it, double value){
     Node *node = it.n;
     Node *new_node = new Node;
     new_node->value = value;
+    this->cached_size++;
 
     if ((this->first == nullptr) && (this->last == nullptr)) {
         this->first = new_node;
@@ -91,6 +97,7 @@ void List::push_after(Iterator it, double value){
 
 void List::pop(Iterator it){
     Node *node = it.n;
+    this->cached_size--;
     if (node != nullptr){
         if ((this->first == node) && (this->last == node)){
             this->first = nullptr;
