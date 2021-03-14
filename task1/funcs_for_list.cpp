@@ -57,27 +57,22 @@ int pop(List *l, Node *node){
         if ((l->first == node) && (l->last == node)){
             l->first = nullptr;
             l->last = nullptr;
-            delete node;
         } else {
             if (l->first == node){
                 l->first = node->next;
                 (node->next)->prev = nullptr;
-                delete node;
             } else {
                 if (l->last == node){
                     l->last = node->prev;
                     (node->prev)->next = nullptr;
-                    delete node;
                 } else {
-                    if ((l->first != node) && (l->last != node)){
-                        (node->prev)->next = node->next;
-                        (node->next)->prev = node->prev;
-                        delete node;
-                    }
+                    (node->prev)->next = node->next;
+                    (node->next)->prev = node->prev;
                 }
             }
         }
     }
+    delete node;
     return 0;
 }
 
@@ -92,11 +87,12 @@ int push_front(List *l, double value){
 }
 
 int pop_back(List *l){
-    pop(l, l->first);
+    pop(l, l->last);
     return 0;
 }
+
 int pop_front(List *l){
-    pop(l, l->last);
+    pop(l, l->first);
     return 0;
 }
 
@@ -114,17 +110,13 @@ void print(List *l){
     std::cout << std::endl;
 }
 
-void clear(List *l){
-    if ((l->first != nullptr) && (l->last != nullptr)){
-        Node *ptr = l->first;
-        Node *cur_ptr = ptr;
-        delete cur_ptr;
-        do{
-            ptr = ptr->next;
-            Node *cur_ptr = ptr;
-            delete cur_ptr;
-        }while (ptr != l->last);
-        l->first = nullptr;
-        l->last = nullptr;
+void clear(List *l) {
+    Node *curr_ptr = l->first;
+    while(curr_ptr != nullptr) {
+        Node *next_ptr = curr_ptr->next;
+        delete curr_ptr;
+        curr_ptr = next_ptr;
     }
+    l->first = nullptr;
+    l->last = nullptr;
 }
