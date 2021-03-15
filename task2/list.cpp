@@ -149,4 +149,5 @@ void List::clear(){
     }
     this->first = nullptr;
     this->last = nullptr;
+    this->cached_size = 0;
 }
