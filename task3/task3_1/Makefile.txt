@@ -1,0 +1,17 @@
+CC=g++
+ CFLAGS=-c -Wall
+ LDFLAGS=
+ SOURCES=../first.cpp
+ OBJECTS=first.o
+ EXECUTABLE=first
+
+ all: $(EXECUTABLE)
+
+ $(EXECUTABLE): $(OBJECTS)
+	$(CC) $(LDFLAGS) $(OBJECTS) -o $(EXECUTABLE)
+
+ $(OBJECTS): $(SOURCES)
+	$(CC) $(CFLAGS) $(SOURCES)
+
+ clean:
+	rm -rf *.o double_list
