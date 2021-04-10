@@ -99,22 +99,25 @@ void List::push_after(Iterator it, double value){
 
 void List::pop(Iterator it){
     Node *node = it.n;
-    this->cached_size--;
     if (node != nullptr){
         if ((this->first == node) && (this->last == node)){
             this->first = nullptr;
             this->last = nullptr;
+            this->cached_size--;
         } else {
             if (this->first == node){
                 this->first = node->next;
                 (node->next)->prev = nullptr;
+                this->cached_size--;
             } else {
                 if (this->last == node){
                     this->last = node->prev;
                     (node->prev)->next = nullptr;
+                    this->cached_size--;
                 } else {
                     (node->prev)->next = node->next;
                     (node->next)->prev = node->prev;
+                    this->cached_size--;
                 }
             }
         }
