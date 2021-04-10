@@ -18,14 +18,19 @@ int c;
 int main()
 {
     C c;
-    std::cout << &c << std::endl;
+    std::cout << "&c: " << &c << std::endl;
     std::cout << std::endl;
-    std::cout << static_cast<A*>(&c) << std::endl;
-    std::cout << static_cast<B*>(&c)<< std::endl;
-    std::cout << reinterpret_cast<A*>(&c) << std::endl;
-    std::cout << reinterpret_cast<B*>(&c) << std::endl;
+
+    std::cout << "static_cast<A*>(&c): " << static_cast<A*>(&c) << std::endl;
+    std::cout << "static_cast<B*>(&c): " << static_cast<B*>(&c) << std::endl;
+    std::cout << "reinterpret_cast<A*>(&c): " << reinterpret_cast<A*>(&c) << std::endl;
+    std::cout << "reinterpret_cast<B*>(&c): " << reinterpret_cast<B*>(&c) << std::endl;
     std::cout << std::endl;
-    std::cout << (A*)(&c) << std::endl;
-    std::cout << (B*)(&c) << std::endl;
+
+    std::cout << "(A*)(&c): " << (A*)(&c) << std::endl;
+    std::cout << "(B*)(&c): " << (B*)(&c) << std::endl;
+    std::cout << std::endl;
+    std::cout << &(c.a) << std::endl;
+    std::cout << &(static_cast<A*>(&c)->a) << std::endl;
     return 0;
 }
