@@ -1,0 +1,17 @@
+CC=g++
+ CFLAGS=-c -Wall
+ LDFLAGS=
+ SOURCES=../main.cpp ../state.cpp
+ OBJECTS=main.o state.o
+ EXECUTABLE=state
+
+ all: $(EXECUTABLE)
+
+ $(EXECUTABLE): $(OBJECTS)
+	$(CC) $(LDFLAGS) $(OBJECTS) -o $(EXECUTABLE)
+
+ $(OBJECTS): $(SOURCES)
+	$(CC) $(CFLAGS) $(SOURCES)
+
+ clean:
+	rm -rf *.o state
