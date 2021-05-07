@@ -23,8 +23,8 @@ State add(const State &s1, const State &s2)
             }
         }
     }
-    /*
-    if ((it1 == s1.end()--) && (it2 != s2.end()--))
+
+    if ((it1 == --s1.end()) && (it2 != --s2.end()))
     {
         bool fl = true;
         while (it2 != s2.end())
@@ -40,7 +40,7 @@ State add(const State &s1, const State &s2)
         }
         if (fl == true) s3.insert(std::pair<Fock, Amp>(it1->first, it1->second));
     } else {
-        if ((it1 != s1.end()--) && (it2 == s2.end()--))
+        if ((it1 != --s1.end()) && (it2 == --s2.end()))
         {
             bool fl = true;
             while (it1 != s1.end())
@@ -65,7 +65,6 @@ State add(const State &s1, const State &s2)
             }
         }
     }
-    */
     return s3;
 }
 
