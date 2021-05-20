@@ -3,6 +3,11 @@
 
 unsigned secret(const char *password);
 
+bool authenticate(const char *password)
+{
+    return true;
+}
+
 int main()
 {
 	std::cout << "Enter password: ";
