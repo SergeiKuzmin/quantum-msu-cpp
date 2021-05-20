@@ -1,0 +1,22 @@
+#include <iostream>
+#include <string>
+
+unsigned secret(const char *password);
+
+int main()
+{
+	std::cout << "Enter password: ";
+	std::string password;
+	std::cin >> password;
+	unsigned s = secret(password.c_str());
+	if(s)
+	{
+		std::cout << "Access GRANTED. Top secret = " << s << std::endl;
+		return 0;
+	}
+	else
+	{
+		std::cout << "Access DENIED." << std::endl;
+		return 1;
+	}
+}

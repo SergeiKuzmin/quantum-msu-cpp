@@ -1,0 +1,18 @@
+CC=g++
+ CFLAGS=-c -Wall
+ LDFLAGS=
+ SOURCES=../main.cpp
+ OBJECTS=main.o
+ DYNAMIC=-Wl,-rpath=/home/sergei/MSU_cpp/quantum-msu-cpp/task5/build -L. -lsecret
+ EXECUTABLE=elf
+
+ all: $(EXECUTABLE)
+
+ $(EXECUTABLE): $(OBJECTS)
+	$(CC) -o $(EXECUTABLE) $(OBJECTS) $(DYNAMIC)
+
+ $(OBJECTS): $(SOURCES)
+	$(CC) $(CFLAGS) $(SOURCES)
+
+ clean:
+	rm -rf *.o state
