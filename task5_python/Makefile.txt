@@ -3,7 +3,7 @@ CC=g++
  LDFLAGS=
  SOURCES=../main.cpp
  OBJECTS=main.o
- DYNAMIC=-Wl,-rpath=/home/sergei/MSU_cpp/quantum-msu-cpp/task5/build -L. -lsecret
+ DYNAMIC=-Wl,-rpath=/home/sergei/MSU_cpp/quantum-msu-cpp/task5_python/build -L. -lsecretnew
  EXECUTABLE=elf
 
  all: $(EXECUTABLE)
@@ -15,4 +15,4 @@ CC=g++
 	$(CC) $(CFLAGS) $(SOURCES)
 
  clean:
-	rm -rf *.o state
+	rm -rf *.o $(EXECUTABLE)
