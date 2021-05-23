@@ -1,0 +1,17 @@
+CC=g++
+ CFLAGS=-c -Wall
+ LDFLAGS=
+ SOURCES=../parse.cpp
+ OBJECTS=parse.o
+ EXECUTABLE=parse
+
+ all: $(EXECUTABLE)
+
+ $(EXECUTABLE): $(OBJECTS)
+	$(CC) -o $(EXECUTABLE) $(OBJECTS)
+
+ $(OBJECTS): $(SOURCES)
+	$(CC) $(CFLAGS) $(SOURCES)
+
+ clean:
+	rm -rf *.o $(EXECUTABLE)
